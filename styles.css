@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+body {
+    background-color: #0E0B16;
+}
+
+a{
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #E7DFDD;
+}
+
+.highlight{
+    color: #E7DFDD
+}
+
+
+.nav {
+    padding-top: 45px;
+    padding-right: 2%;
+}
+
+.homecontainer {
+    border-radius: 15px;
+    border: 4px double #E8E8E8;
+    padding-top: 0px;
+}
+
+.homecard, .outercard, .card-body, .middle{
+    position: absolute;
+
+}
+.homecard:hover{
+    transform: rotate(13deg);
+    transition: transform .5s ease;
+}
+
+.homecard{
+    border-radius: 15px;
+    background-color: #E7DFDD;
+    z-index: 10;
+    width: 25rem;
+    height: 25rem;
+    transition: all ease-in-out 0.5s;
+}
+
+.stackedContainer {
+    position: relative;
+    margin-top: 8%;
+    margin-left: 10%;
+  }
+
+.outercard{
+    background-color: #4717F6;
+    transform: rotate(-10deg);
+    width: 25rem;
+    height: 25rem;
+}
+
+.middle{
+    background-color: #A239CA;
+    transform: rotate(-5deg);
+    width: 25rem;
+    height: 25rem;
+}
+
+.card-body{
+    z-index: 20;
+}
+li a:hover{
+    color: #4717F6 !important;
+    transform: scale(1.2);
+    transition: transform .3s ease;
+}
+
+#face {
+    width: 500px;
+    transition: all ease-in-out 0.5s;
+    position: relative;
+    left: 15%;
+    top: 5%;
+}
+
+#face:hover {
+    transform: scale(1.2);
+    transition: transform .5s ease;
+}
+
+.greetings {
+    margin: 50px 200px 60px 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #0E0B16;
+    padding: 1%;
+    font-size: 1.5rem;
+    justify-content: center;
+}
+
+.homegreetings {
+    margin: 30px 50px 60px 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: #0E0B16;
+    padding: 1%;
+    justify-content: center;
+}
+
+.greetings1, .greetings1 a, .comingsoon {
+    text-align: center;
+    color: #E7DFDD;
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 30px 0 0 0;
+}
+
+.greetings1 a:hover {
+    color: #4717F6 !important;
+    transform: scale(1.2);
+    transition: transform .3s ease;
+}
+
+.greetings1 {
+    margin-left: 10%;
+}
+
+.greetings1 a{
+    color: #A239CA !important;
+}
+
+.comingsoon{
+    margin: 20% 0 0 0 !important;
+    color: #A239CA !important;
+}
+
+.fuschia{
+    color: #A239CA !important;
+}
+
+.white{
+    color: #E7DFDD !important;
+}
+
+.title{
+    color: #E7DFDD;
+    font-family: 'Inter', sans-serif;
+    font-size: 600%;
+    font-weight: bold;
+}
+
+.card-title, .card-title a{
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: #4717F6;
+    padding: 1%;
+    text-align: center;
+    font-size: 20px;
+}
+
+.card-title {
+    margin: 20px 40px 30px 40px;
+}
+
+.card-title a{
+    margin: 20px 0px 30px 0px;
+    color: #A239CA !important;
+}
+
+
+.btn{
+    margin: 35px;
+    color: #4717F6;
+    border-color: #4717F6;
+    transition: all ease-in-out 0.3s;
+}
+
+.btn:hover{
+    color: #E7DFDD;
+    border-color: #4717F6;
+    background-color: #4717F6;
+    transition: transform .3s ease;
+}
+
+.project-container{
+    margin: 5% 0 0 8%;
+}
+
+.project-card{
+    margin: 5% 0 0 0;
+    border-radius: 15px;
+    background-color: #E7DFDD;
+    width: 90%;
+    height: 30rem;
+    transition: all ease-in-out 0.5s;
+    padding: 3%;
+}
+
+.project-card-title{
+    color: #4717F6;
+    font-family: 'Inter', sans-serif;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.project-card-title{
+    line-height:25px;
+}
+
+.project-card a{
+    color: rgba(14, 11, 22, .7) !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 50%;
+}
+
+.project-card-description{
+    color: rgba(14, 11, 22, 1) !important;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 35px;
+}
+
+.image {
+    margin-top: 30px;
+    padding: 0 0 0 0 !important;
+    height: 170px;
+    width: auto;
+  }
+
+  .mobileimage {
+    padding: 0 0 0 0 !important;
+    height: 280px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  .webimage {
+    padding: 0 0 0 0 !important;
+    height: 300px;
+    width: auto;
+  }
+
+  .cimage {
+    padding: 0 0 0 0 !important;
+    width: 40%;
+    object-fit: cover;
+  }
+
+ .image-container img:hover{
+    transform: scale(1.05);
+    transition: transform .3s ease;
+  }
+
+  .container{
+    position: absolute;
+  }
+
+  .card{
+    border-radius: 15px;
+    margin: 30px;
+    padding: 28px;
+  }
+
+  .about{
+    font-size: 500% !important;
+    margin-left: 2%;
+  }
+
+  .about-container{
+    margin: 5% 0 0 8%;
+}
