@@ -30,7 +30,7 @@ justify-content: center;
   margin-top: 27%;
   position: absolute;
   opacity: 0; /* make it initially invisible */
-  animation: appear 3s forwards 3s; /* name, duration, fill-mode, delay */
+  animation: appear 5s forwards 5s; /* name, duration, fill-mode, delay */
 }
 
 @keyframes appear {
