@@ -342,21 +342,16 @@
   document.addEventListener('DOMContentLoaded', function() {
   var text = "CAN WE MAKE US OFFICIAL?"; // Replace with your text
   var element = document.querySelector('.txtt');
-  var index = 0;
+  element.innerHTML = text;
 
-  function typeWriter() {
-    if (index < text.length) {
-      element.innerHTML += text.charAt(index);
-      index++;
-      setTimeout(typeWriter, 200); // Adjust speed by changing delay time
-    } else {
-      index = 0;
-      element.innerHTML = '';
-      setTimeout(typeWriter, 5000); // Wait 5 seconds before restarting
-    }
+  function wipeEffect() {
+    element.style.width = element.scrollWidth + 'px';
+    setTimeout(function() {
+      element.style.width = '0';
+    }, 5000); // Wait 5 seconds before restarting
   }
 
-  setTimeout(typeWriter, 2000); // Start after 2 seconds
+  setTimeout(wipeEffect, 2000); // Start after 2 seconds
 });
 </script>
 </body>
