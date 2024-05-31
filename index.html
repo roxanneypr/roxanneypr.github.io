@@ -350,14 +350,15 @@
       index++;
       setTimeout(typeWriter, 200); // Adjust speed by changing delay time
     } else {
-      index = 0;
-      setTimeout(typeWriter, 5000);
-      element.innerHTML = '';
-       // Wait 5 seconds before restarting
+      setTimeout(function() {
+        index = 0;
+        element.innerHTML = '';
+        typeWriter(); // Restart typing after the text has been cleared
+      }, 5000); // Wait 5 seconds before restarting
     }
   }
 
-  setTimeout(typeWriter, 2000); // Start after 2 seconds
+  typeWriter(); // Start immediately
 });
 </script>
 </body>
