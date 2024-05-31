@@ -148,7 +148,7 @@ width: 60%;
   transform: translate(-50%, -100%);
   width: 8vmin;
   height: 8vmin;
-  background-color: #6bf0ff;
+  background-color: #0f601e;
   filter: blur(10vmin);
 }
 .flower__leaf {
@@ -158,7 +158,7 @@ width: 60%;
   width: 8vmin;
   height: 11vmin;
   border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
-  background-color: #a7ffee;
+  background-color: #15932c;
   background-image: linear-gradient(to top, #ddac0b, #f1cb40);
   transform-origin: bottom center;
   opacity: 0.9;
@@ -643,7 +643,7 @@ width: 60%;
   border-radius: 100% 0% 0% 100%/100% 100% 0% 0%;
   box-shadow: inset 0 2px 1vmin rgba(44, 238, 252, 0.2);
   background-image: linear-gradient(to bottom left, transparent, var(--dark-color)), linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom right, #099030 50%, transparent 50%, transparent);
   mask-image: linear-gradient(to bottom right, #159faa 50%, transparent 50%, transparent);
 }
 .flower__g-fr {
