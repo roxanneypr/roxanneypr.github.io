@@ -29,10 +29,7 @@ justify-content: center;
   z-index: 1;
   margin-top: 27%;
   position: absolute;
-  overflow: hidden; /* Ensures the content is only shown within the .txtt element */
-  white-space: nowrap; /* Keeps the content on a single line */
-  width: 0;
-  transition: width 2s linear;
+  
   /* opacity: 0; /* make it initially invisible
   animation: appear 8s forwards;  *//* name, duration, fill-mode, delay */
 }
