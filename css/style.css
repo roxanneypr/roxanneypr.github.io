@@ -29,8 +29,8 @@ justify-content: center;
   z-index: 1;
   margin-top: 27%;
   position: absolute;
-  opacity: 0; /* make it initially invisible */
-  animation: appear 8s forwards; /* name, duration, fill-mode, delay */
+  /* opacity: 0; /* make it initially invisible
+  animation: appear 8s forwards;  *//* name, duration, fill-mode, delay */
 }
 
 @keyframes appear {
