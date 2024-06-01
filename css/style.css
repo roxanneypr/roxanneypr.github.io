@@ -27,8 +27,10 @@ justify-content: center;
   color: rgb(246, 188, 30);
   font-family: 'Courier New', Courier, monospace;
   z-index: 1;
-  margin-top: 27%;
+ /*  margin-top: 27%; */
+/*  margin-bottom: 90%; */
   position: absolute;
+  top: 80%;
   
   /* opacity: 0; /* make it initially invisible
   animation: appear 8s forwards;  *//* name, duration, fill-mode, delay */
