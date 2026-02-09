@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .game-screen {
+            display: block;
+        }
+
+        .final-screen {
+            display: none;
+        }
+
+        .word-display {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .word {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-section {
+            margin: 20px 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #764ba2;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-text {
+            color: #666;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #667eea;
+            margin: 15px 0;
+            font-weight: bold;
+            min-height: 25px;
+        }
+
+        .message.success {
+            color: #28a745;
+        }
+
+        .message.error {
+            color: #dc3545;
+        }
+
+        .final-message {
+            font-size: 36px;
+            color: #667eea;
+            margin: 30px 0;
+            font-weight: bold;
+            line-height: 1.5;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .button-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            min-height: 200px;
+            padding: 20px 0;
+        }
+
+        .yes-button, .no-button {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .yes-button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .no-button {
+            background: #6c757d;
+            position: absolute;
+        }
+
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            font-size: 24px;
+            color: #28a745;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .word {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .final-message {
+                font-size: 28px;
+            }
+
+            input, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-screen">
+            <h1>💕 Guess the Message 💕</h1>
+            <p class="info-text">Words revealed: <span id="wordCount">0</span>/10</p>
+            <div class="word-display" id="wordDisplay"></div>
+            <div class="message" id="message"></div>
+            <div class="input-section">
+                <input type="text" id="guessInput" placeholder="Guess a word..." autocomplete="off">
+                <button onclick="makeGuess()">Submit Guess</button>
+            </div>
+        </div>
+
+        <div class="final-screen" id="finalScreen">
+            <div class="final-message">
+                Will You Be<br>My Valentine? 💕
+            </div>
+            <div class="button-container" id="buttonContainer">
+                <button class="yes-button" id="yesButton" onclick="handleYes()">Yes! 💕</button>
+                <button class="no-button" id="noButton" onclick="handleNo()">No</button>
+            </div>
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Sending notification...</p>
+            </div>
+            <div class="success-message" id="successMessage">
+                🎉 Yay! See you on Valentine's Day! 🎉
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const words = ["love", "seohee", "14", "forever", "us", "cold", "chill", "foods", "together", "rest"];
+        const targetPhrase = ["will", "you", "be", "my", "valentine"];
+        let revealedWords = [];
+        let currentWordIndex = 0;
+        let guessedCorrectly = new Set();
+        let noClickCount = 0;
+
+        // Reveal first word on load
+        window.onload = function() {
+            revealNextWord();
+        };
+
+        function revealNextWord() {
+            if (currentWordIndex < words.length) {
+                revealedWords.push(words[currentWordIndex]);
+                currentWordIndex++;
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            const wordDisplay = document.getElementById('wordDisplay');
+            wordDisplay.innerHTML = '';
+
+            revealedWords.forEach(word => {
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'word';
+                wordSpan.textContent = word;
+                wordDisplay.appendChild(wordSpan);
+            });
+
+            document.getElementById('wordCount').textContent = revealedWords.length;
+        }
+
+        function makeGuess() {
+            const input = document.getElementById('guessInput');
+            const guess = input.value.trim().toLowerCase();
+            const messageEl = document.getElementById('message');
+
+            if (!guess) {
+                messageEl.textContent = 'Please enter a word!';
+                messageEl.className = 'message error';
+                return;
+            }
+
+            if (targetPhrase.includes(guess)) {
+                if (guessedCorrectly.has(guess)) {
+                    messageEl.textContent = `You already guessed "${guess}"!`;
+                    messageEl.className = 'message';
+                } else {
+                    guessedCorrectly.add(guess);
+                    messageEl.textContent = `Correct! "${guess}" is part of the message! (${guessedCorrectly.size}/5)`;
+                    messageEl.className = 'message success';
+
+                    if (guessedCorrectly.size === 5) {
+                        setTimeout(showFinalScreen, 1500);
+                    } else {
+                        revealNextWord();
+                    }
+                }
+            } else {
+                messageEl.textContent = `"${guess}" is not part of the message. Try again!`;
+                messageEl.className = 'message error';
+
+                if (currentWordIndex < words.length) {
+                    revealNextWord();
+                } else {
+                    // All words revealed, show final screen
+                    setTimeout(showFinalScreen, 2000);
+                }
+            }
+
+            input.value = '';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('guessInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+
+        function showFinalScreen() {
+            document.querySelector('.game-screen').style.display = 'none';
+            document.getElementById('finalScreen').style.display = 'block';
+        }
+
+        function handleYes() {
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const buttonContainer = document.getElementById('buttonContainer');
+
+            buttonContainer.style.display = 'none';
+            loading.style.display = 'block';
+
+            // Send email notification using a simple email service
+            sendEmail().then(() => {
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+            }).catch(() => {
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+            });
+        }
+
+        function handleNo() {
+            noClickCount++;
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+            const container = document.getElementById('buttonContainer');
+
+            // Make Yes button bigger
+            const currentSize = 15 + (noClickCount * 5);
+            yesButton.style.padding = `${currentSize}px ${currentSize * 2}px`;
+            yesButton.style.fontSize = `${16 + noClickCount * 2}px`;
+
+            // Move No button to random position
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+
+            const maxX = containerWidth - buttonWidth - 40;
+            const maxY = containerHeight - buttonHeight - 40;
+
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+        }
+
+        async function sendEmail() {
+            try {
+                // Using FormSubmit.co - a free form backend service
+                const formData = new FormData();
+                formData.append('email', 'resuellorox@gmail.com');
+                formData.append('subject', 'She said YES! 💕');
+                formData.append('message', 'Seohee said YES to being your Valentine! 💕🎉');
+
+                await fetch('https://formsubmit.co/ajax/resuellorox@gmail.com', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        subject: 'She said YES! 💕',
+                        message: 'Seohee said YES to being your Valentine! 💕🎉',
+                        _template: 'box',
+                        _captcha: 'false'
+                    })
+                });
+
+                return true;
+            } catch (error) {
+                console.error('Email error:', error);
+                return true; // Still show success to the user
+            }
+        }
+    </script>
+</body>
+</html>
