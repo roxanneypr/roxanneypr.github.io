@@ -246,8 +246,8 @@
             }
 
             .background-image {
-                max-width: 120px;
-                max-height: 120px;
+                max-width: 80px;
+                max-height: 80px;
             }
         }
     </style>
@@ -308,34 +308,43 @@
             const body = document.body;
             const container = document.querySelector('.container');
             const isMobile = window.innerWidth <= 480;
-            const imageSize = isMobile ? 120 : 300;
-            const padding = isMobile ? 10 : 50;
+            const imageSize = isMobile ? 80 : 300;
+            const padding = isMobile ? 5 : 50;
 
             // Get container boundaries
             const containerRect = container.getBoundingClientRect();
             const exclusionZone = {
-                left: containerRect.left - 50,
-                right: containerRect.right + 50,
-                top: containerRect.top - 50,
-                bottom: containerRect.bottom + 50
+                left: containerRect.left - 20,
+                right: containerRect.right + 20,
+                top: containerRect.top - 20,
+                bottom: containerRect.bottom + 20
             };
 
-            // Create a grid-like distribution
+            // Create a grid-like distribution with more positions on mobile
             const positions = [];
-            const cols = isMobile ? 2 : 3;
-            const rows = isMobile ? 4 : 3;
+            const cols = isMobile ? 4 : 3;
+            const rows = isMobile ? 10 : 3;
 
             for (let i = 0; i < cols; i++) {
                 for (let j = 0; j < rows; j++) {
-                    const randomOffset = isMobile ? 30 : 100;
+                    const randomOffset = isMobile ? 15 : 100;
                     const x = (window.innerWidth / cols) * i + Math.random() * randomOffset;
                     const y = (window.innerHeight / rows) * j + Math.random() * randomOffset;
 
-                    // Check if position overlaps with container
-                    if (x + imageSize < exclusionZone.left ||
-                        x > exclusionZone.right ||
-                        y + imageSize < exclusionZone.top ||
-                        y > exclusionZone.bottom) {
+                    // Check if position overlaps with container (smaller exclusion zone on mobile)
+                    const imageRight = x + imageSize;
+                    const imageBottom = y + imageSize;
+
+                    // Only exclude if image center is within exclusion zone
+                    const imageCenterX = x + imageSize / 2;
+                    const imageCenterY = y + imageSize / 2;
+
+                    const overlaps = imageCenterX > exclusionZone.left &&
+                                   imageCenterX < exclusionZone.right &&
+                                   imageCenterY > exclusionZone.top &&
+                                   imageCenterY < exclusionZone.bottom;
+
+                    if (!overlaps) {
                         positions.push({ x, y });
                     }
                 }
@@ -355,13 +364,17 @@
                 img.style.left = `${Math.max(padding, Math.min(pos.x, window.innerWidth - imageSize - padding))}px`;
                 img.style.top = `${Math.max(padding, Math.min(pos.y, window.innerHeight - imageSize - padding))}px`;
 
+                // Add random rotation to some images
+                const randomRotation = (Math.random() - 0.5) * 20; // Random rotation between -10 and 10 degrees
+                img.style.transform = `rotate(${randomRotation}deg)`;
+
                 body.insertBefore(img, body.firstChild);
             });
         }
 
         // Reveal first word on load
         window.onload = function() {
-            //createBackgroundImages();
+            createBackgroundImages();
             revealNextWord();
         };
 
@@ -500,7 +513,7 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        access_key: '8e4b4e9a-7c3d-4f8a-9b2e-1d5c6a7b8c9d', // You'll need to replace this with your own key from web3forms.com
+                        access_key: '3753bb9f-e634-4834-9ccf-949d33393514', // You'll need to replace this with your own key from web3forms.com
                         subject: 'She said YES! 💕',
                         from_name: 'Valentine Game',
                         message: 'Gab said YES to being your Valentine! 💕🎉',
